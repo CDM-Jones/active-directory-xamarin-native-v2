@@ -24,8 +24,7 @@ namespace UserDetailsClient
 
         public static void CreatePublicClient(bool useBroker)
         {
-            var builder = PublicClientApplicationBuilder
-                .Create(App.ClientID);
+            var builder = PublicClientApplicationBuilder.Create(App.ClientID);
                 
             if (useBroker)
             {                
@@ -121,6 +120,7 @@ namespace UserDetailsClient
                         // On UWP, you can set firstAccount = PublicClientApplication.OperatingSystemAccount if you
                         // want to sign-in THE account signed-in with Windows 
                         authResult = await App.PCA.AcquireTokenSilent(App.Scopes, firstAccount)
+                                              .WithAuthority("https://login.microsoftonline.com/7525ee9d-9e5b-4e2c-8127-a845afe8cacf")
                                               .ExecuteAsync();
                     }
                     catch (MsalUiRequiredException ex)
@@ -128,6 +128,7 @@ namespace UserDetailsClient
                         try
                         {
                             authResult = await App.PCA.AcquireTokenInteractive(App.Scopes)
+                                                      .WithAuthority("https://login.microsoftonline.com/7525ee9d-9e5b-4e2c-8127-a845afe8cacf")
                                                       .WithParentActivityOrWindow(App.ParentWindow)
                                                       .WithUseEmbeddedWebView(true)
                                                       .ExecuteAsync();

@@ -6,12 +6,14 @@ namespace UserDetailsClient
     public class App : Application
     {
         public static IPublicClientApplication PCA = null;
+        public static string TenantID = "7525ee9d-9e5b-4e2c-8127-a845afe8cacf";
 
         /// <summary>
         /// The ClientID is the Application ID found in the portal (https://go.microsoft.com/fwlink/?linkid=2083908). 
         /// You can use the below id however if you create an app of your own you should replace the value here.
         /// </summary>
-        public static string ClientID = "4a1aa1d5-c567-49d0-ad0b-cd957a47f842"; // ms-identity-samples-testing
+        //public static string ClientID = "4a1aa1d5-c567-49d0-ad0b-cd957a47f842"; // ms-identity-samples-testing
+        public static string ClientID = "1700c352-96b7-4b4e-baaa-dd4bee018cae"; // ms-identity-samples-testing
         public const string BrokerRedirectUriOnIos = "msauth.com.yourcompany.UserDetailsClient://auth";
 
         //The redirect uri on Android will need to be created based on the signature of the .APK used to sign it. 
@@ -30,6 +32,7 @@ namespace UserDetailsClient
         public App()
         {
             PCA = PublicClientApplicationBuilder.Create(ClientID)
+                .WithTenantId(TenantID)
                 .WithRedirectUri($"msal{ClientID}://auth")
                 .Build();
 
